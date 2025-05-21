@@ -4,9 +4,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 
-import authRoutes from "./routes/authRoutes.js";
-import bookRoutes from "./routes/bookRoutes.js";
-import reviewRoutes from "./routes/reviewRoutes.js";
+import userRoutes from "./routes/user.routes.js";
+import bookRoutes from "./routes/book.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
 
 import errorMiddleware from './middlewares/error.middleware.js'
 
@@ -30,7 +30,7 @@ app.get("/ping", (req, res) => {
   res.send("Pong...");
 });
 
-app.use("/api/v1/user", authRoutes);
+app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/book", bookRoutes);
 app.use("/api/v1/review", reviewRoutes);
 
