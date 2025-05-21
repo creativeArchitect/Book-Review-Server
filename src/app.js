@@ -4,9 +4,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 
-import authRoutes from "./routes/authRoutes";
-import bookRoutes from "./routes/bookRoutes";
-import reviewRoutes from "./routes/reviewRoutes";
+import authRoutes from "./routes/authRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
+
+import errorMiddleware from './middlewares/error.middleware.js'
 
 const app = express();
 
