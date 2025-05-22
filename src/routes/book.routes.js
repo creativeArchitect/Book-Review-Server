@@ -1,17 +1,19 @@
 import { Router } from "express";
 
-import { getAllBooks, addNewBook, getBook } from "../controllers/book.controller";
+import {
+  getAllBooks,
+  addNewBook,
+  getBook,
+} from "../controllers/book.controller.js";
 
-import { isLoggedIn } from '../middlewares/auth.middleware.js'
+import { isLoggedIn } from "../middlewares/auth.middleware.js";
 
 const bookRouter = Router();
 
-bookRouter.get('/books', getAllBooks)
+bookRouter.get("/", getAllBooks);
 
-bookRouter.post('/books', isLoggedIn, addNewBook)
+bookRouter.post("/", isLoggedIn, addNewBook);
 
-bookRouter.get('/books/:bookId', getBook)
-
-
+bookRouter.get("/:bookId", getBook);
 
 export default bookRouter;

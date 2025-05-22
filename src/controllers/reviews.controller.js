@@ -1,6 +1,6 @@
 import Review from '../models/Review.js';
 import Book from '../models/Book.js';
-import AppError from '../utils/AppError.js';
+import AppError from '../utils/error.util.js';
 
 export const addReview = async (req, res, next)=> {
     try{

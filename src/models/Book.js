@@ -49,7 +49,7 @@ bookSchema.virtual('reviews', {
     foreignField: 'book'
 })
 
-const Book = mongoose.model("Book", BookSchema);
+const Book = mongoose.model("Book", bookSchema);
 
 export default Book;
 

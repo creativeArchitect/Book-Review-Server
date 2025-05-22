@@ -34,6 +34,10 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/book", bookRoutes);
 app.use("/api/v1/review", reviewRoutes);
 
+app.use((req, res, next) => {
+  res.status(404).json({ success: false, message: "Route not found" });
+});
+
 app.use(errorMiddleware);
 
 export default app;

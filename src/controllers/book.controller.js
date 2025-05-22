@@ -1,5 +1,5 @@
 import Book from '../models/Book.js';
-import AppError from '../utils/AppError.js';
+import AppError from '../utils/error.util.js';
 
 export const getAllBooks =  async (req, res, next)=>{
     try{
