@@ -5,11 +5,11 @@ import { addReview, updateReview, deleteReview } from '../controllers/reviews.co
 
 const reviewRoutes = express.Router();
 
-reviewRoutes.post('/books/:bookId/reviews', isLoggedIn, addReview)
+reviewRoutes.post('/:bookId', isLoggedIn, addReview)
 
-reviewRoutes.put('/reviews/:id', isLoggedIn, updateReview)
+reviewRoutes.put('/:id', isLoggedIn, updateReview)
 
-reviewRoutes.delete('/reviews/:id', isLoggedIn, deleteReview)
+reviewRoutes.delete('/:id', isLoggedIn, deleteReview)
 
 export default reviewRoutes;
 

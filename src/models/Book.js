@@ -36,11 +36,13 @@ const bookSchema = new mongoose.Schema({
   })
 
 // Virtual field for average rating
-bookSchema.virtual('averageRating').get(function (){
-    if(!this.reviews || this.reviews.length === 0) return 0;
+bookSchema.virtual('averageRating').get(function () {
+  if (!this.reviews || this.reviews.length === 0) return 0;
 
-    const total = this.reviews.reduce((acc, review)=> acc + review.rating, 0);
-})
+  const total = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+  return total / this.reviews.length;
+});
+
 
 //  virtual for reviews (populate later)
 bookSchema.virtual('reviews', {
