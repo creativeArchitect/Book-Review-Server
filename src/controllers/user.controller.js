@@ -55,7 +55,7 @@ export const login = async (req, res, next)=>{
             return next(new AppError("Enter the required fields", 400));
         }
 
-        const user = User.findOne({ email: email }).select(password);
+        const user = await User.findOne({ email: email }).select('+password');
 
         if(!user || !user.comparePassword(password)){
             return next(new AppError("Invalid creadentials", 400));
