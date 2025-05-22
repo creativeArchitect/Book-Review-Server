@@ -8,11 +8,15 @@ export const isLoggedIn = async (req, res, next)=>{
         return next(new Error("Unauthenticated user, please login", 401))
     }
 
-    const userDetails = jwt.verify(token, process.env.JWT_SECRET);
+    try{
+        const userDetails = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = userDetails;
+        req.user = userDetails;
 
-    next();
+        next();
+    }catch (err) {
+        return res.status(401).json({ message: "Invalid or expired token" });
+      }
 }
 
 
