@@ -51,14 +51,16 @@ export const login = async (req, res, next)=>{
     try{
         const { email, password } = req.body;
 
+        console.log(password);
+
         if(!email || !password){
             return next(new AppError("Enter the required fields", 400));
         }
 
         const user = await User.findOne({ email: email }).select('+password');
 
-        if(!user || !user.comparePassword(password)){
-            return next(new AppError("Invalid creadentials", 400));
+        if (!user || !(await user.comparePassword(password))) {
+            return next(new AppError("Invalid credentials", 400));
         }
 
         const token = await user.getJWT();
