@@ -3,7 +3,7 @@ import { Router } from "express";
 import {
   getAllBooks,
   addNewBook,
-  getBook,
+  getBook, deleteBook
 } from "../controllers/book.controller.js";
 
 import { isLoggedIn } from "../middlewares/auth.middleware.js";
@@ -14,6 +14,8 @@ bookRouter.get("/", getAllBooks);
 
 bookRouter.post("/", isLoggedIn, addNewBook);
 
-bookRouter.get("/:bookId", getBook);
+bookRouter.get("/:bookId", isLoggedIn, getBook);
+
+bookRouter.delete("/:bookId", isLoggedIn, deleteBook);
 
 export default bookRouter;

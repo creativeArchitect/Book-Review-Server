@@ -77,7 +77,7 @@ export const getBook = async (req, res, next) => {
     }
 
     const reviews = book.reviews || [];
-    const avgRating = reviews.length
+    const averageRating = reviews.length
       ? (
           reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
         ).toFixed(2)
@@ -90,6 +90,33 @@ export const getBook = async (req, res, next) => {
         ...book.toObject(),
         averageRating,
       },
+    });
+  } catch (err) {
+    return next(new AppError(err.message, 500));
+  }
+};
+
+export const deleteBook = async (req, res, next) => {
+  try {
+    const { bookId } = req.params;
+
+    const book = await Book.findById(bookId);
+
+    if (!book) {
+      return next(new AppError("Book doesn't exists", 400));
+    }
+
+    // Only the user who created the book can delete it
+    if(book.createdBy.toString() !== req.user.id.toString()){
+        return next(new AppError("Unauthorized action", 403)); 
+    }
+
+    await book.deleteOne();
+
+    res.status(200).json({
+      success: true,
+      message: "Book deleted successfully.",
+      book,
     });
   } catch (err) {
     return next(new AppError(err.message, 500));
