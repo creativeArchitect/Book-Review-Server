@@ -30,11 +30,9 @@ export const  register = async (req, res, next)=>{
             return next(new AppError("user registration is failed, please try again", 400))
         }
 
-        await user.save();
-
         user.password = undefined;
 
-        const token = await User.getJWT();
+        const token = await user.getJWT();
 
         res.cookie('token', token, cookieOptions);
 
